@@ -25,10 +25,10 @@ namespace Payvision.CodeChallenge.Refactoring.FraudDetection
             };
         }
 
-        public static FraudRadar Build(IOrderProvider orderFileProvider) =>
+        public static FraudRadar Build(IOrderProvider orderProvider) =>
             // It would be a good idea to use a dependency container to prevent manual instanciation
             new FraudRadar(
-                orderFileProvider,
+                orderProvider,
                 new OrderNormalizer(GetNormalizationRules()),
                 new FraudService()
                 );
