@@ -26,7 +26,7 @@ namespace Payvision.CodeChallenge.Algorithms.CountingBits
                 if ((input & 1) == 1)
                     result.Add(position);
                 // Moves 1 bit to the right
-                input = input >> 1;
+                input >>= 1;
             }
             result[0] = result.Count - 1;
             return result;

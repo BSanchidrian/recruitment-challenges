@@ -12,6 +12,8 @@ namespace Payvision.CodeChallenge.Refactoring.FraudDetection.Tests
     using System.Linq;
     using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Payvision.CodeChallenge.Refactoring.FraudDetection.Input;
+    using Payvision.CodeChallenge.Refactoring.FraudDetection.Model;
 
     [TestClass]
     public class FraudRadarTests
@@ -62,11 +64,12 @@ namespace Payvision.CodeChallenge.Refactoring.FraudDetection.Tests
 
         
 
-        private static List<FraudRadar.FraudResult> ExecuteTest(string filePath)
+        private static List<FraudResult> ExecuteTest(string filePath)
         {
-            var fraudRadar = new FraudRadar();
-
-            return fraudRadar.Check(filePath).ToList();
+            // Would be great here too, to use a dependency container to resolve the order provider
+            var orderProvider = new OrderFileProvider(filePath);
+            var fraudRadar = FraudRadarBuilder.Build(orderProvider);
+            return fraudRadar.Check().ToList();
         }
     }
 }
